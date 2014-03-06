@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%
 %%%% Connect
 %%%%%%%%%%%%%%%
-% Takes a server and machine as an input which it then tries to connect to. Since Shire was the specification it is hardcoded. Other ways???
+% Takes a server and machine as an input which it then tries to connect to.
 % Interperts the results from server and gives the apropriate errors.
 loop(St, {connect, {_Server, _Machine}}) ->
     Con = (catch(genserver:request({list_to_atom(_Server), list_to_atom(_Machine)}, {connect, St#cl_st.nick}))),
@@ -17,7 +17,7 @@ loop(St, {connect, {_Server, _Machine}}) ->
 		ok -> St2 = St#cl_st{server = {list_to_atom(_Server), list_to_atom(_Machine)}}, {ok, St2}
 	end;
 
-% Takes a server as an input which it then tries to connect to. Since Shire was the specification it is hardcoded. Other ways???
+% Takes a server as an input which it then tries to connect to.
 % Interperts the results from server and gives the apropriate errors.
 loop(St, {connect, _Server}) ->
     Con = (catch(genserver:request(list_to_atom(_Server), {connect, St#cl_st.nick}))),
@@ -30,7 +30,7 @@ loop(St, {connect, _Server}) ->
 %%%%%%%%%%%%%%%
 %%%% Disconnect
 %%%%%%%%%%%%%%%
-% Takes no input and similarly to connect the server shire is hardcoded. Appropriate respones are given to the different errors.
+% Appropriate respones are given to the different errors that are given by the inputs.
 % The corectness test says there are things wrong here. Probably because of the hardcoding. Not sure how to fix this?
 loop(St, disconnect) ->
 	Server = St#cl_st.server,
